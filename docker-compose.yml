@@ -1,0 +1,26 @@
+version: "3.8"
+
+services:
+  postgres:
+    container_name: postgres
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: StrongPassword1
+      POSTGRES_DB: quiz
+    ports:
+      - "5432:5432"
+    volumes:
+      - dbdata:/var/lib/postgresql/data
+
+  go:
+    container_name: go
+    build:
+      context: .
+    depends_on:
+      - "postgres"
+    ports:
+      - "8000:8000"
+
+volumes:
+  dbdata: # create the volume for persisting data.
