@@ -1,9 +1,19 @@
-package repository
+package quiz
 
 import (
 	"github.com/OneeyK/KPI_GoLang/pkg/models"
 	"gorm.io/gorm"
 )
+
+type Quiz interface {
+	Create(quiz models.Quiz) (int, error)
+	FindByID(quizID uint64) (*models.Quiz, error)
+	Remove(quizID uint64) error
+	Update(quizID uint64, updatedQuiz models.Quiz) (*models.Quiz, error)
+	GetAll() ([]models.Quiz, error)
+	SaveDashboard(userID uint64, quizID uint64, score int) (*models.Dashboard, error)
+	GetLeaderboard(quizID uint64) (*models.Dashboard, error)
+}
 
 type QuizDB struct {
 	db *gorm.DB
@@ -42,10 +52,12 @@ func (r *QuizDB) Update(quizID uint64, updatedQuiz models.Quiz) (*models.Quiz, e
 	if _, err := r.FindByID(quizID); err != nil {
 		return nil, err
 	}
+
 	updatedQuiz.ID = int(quizID)
 	if err := r.db.Save(&updatedQuiz).Error; err != nil {
 		return nil, err
 	}
+
 	return &updatedQuiz, nil
 }
 
