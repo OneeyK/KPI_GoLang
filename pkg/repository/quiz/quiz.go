@@ -1,4 +1,4 @@
-package repository
+package quiz
 
 import (
 	"github.com/OneeyK/KPI_GoLang/pkg/models"

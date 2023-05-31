@@ -1,4 +1,4 @@
-package handler
+package utils
 
 import (
 	log "github.com/sirupsen/logrus"
@@ -10,7 +10,7 @@ type ErrorResponse struct {
 	Message string `json:"message,omitempty"`
 }
 
-func newErrorResponse(c *gin.Context, statusCode int, message string) {
+func NewErrorResponse(c *gin.Context, statusCode int, message string) {
 	log.Error(message)
 	c.AbortWithStatusJSON(statusCode, ErrorResponse{message})
 }

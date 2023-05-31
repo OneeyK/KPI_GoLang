@@ -10,7 +10,6 @@ import (
 	"gorm.io/gorm"
 )
 
-// Config structure for representing database connection string
 type Config struct {
 	Host     string
 	Username string
@@ -21,7 +20,6 @@ type Config struct {
 
 var DB *gorm.DB
 
-// ConnectPostgres connect to postgres database
 func ConnectPostgres(cfg Config) {
 	dsn := fmt.Sprintf("host=%s user=%s password=%s dbname=%s port=%s sslmode=disable",
 		cfg.Host,

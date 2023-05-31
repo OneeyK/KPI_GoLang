@@ -1,4 +1,4 @@
-package repository
+package auth
 
 import (
 	"github.com/OneeyK/KPI_GoLang/pkg/models"
